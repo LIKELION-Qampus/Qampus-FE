@@ -77,7 +77,7 @@
 body {
   margin: 0;
   background-color: #ebebeb;
-  font-family: Arial, sans-serif;
+  font-family: Pretendard;
 }
 
 /* 모바일 화면크기 - 아이폰 17 기준 */
@@ -85,11 +85,8 @@ body {
   width: 402px;
   min-height: 874px;
   margin: 0 auto;
+  position: relative;
   background: #fff;
-}
-
-.main {
-  padding: 20px;
 }
 
 @media (min-width: 430px) {

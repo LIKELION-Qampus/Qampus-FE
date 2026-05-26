@@ -14,7 +14,10 @@
       <header class="header">
         <img class="head-left-img" src="../assets/icons/chevron-left.svg" />
         <h1>질의 응답</h1>
-        <img class="head-right-img" src="../assets/icons/ellipsis-vertical-b.svg" />
+        <img
+          class="head-right-img"
+          src="../assets/icons/ellipsis-vertical-b.svg"
+        />
       </header>
 
       <main class="main">
@@ -23,9 +26,9 @@
           <!-- 질문자 유저정보 -->
           <div class="content-user">
             <img class="user-img" src="../assets/icons/user.svg" />
-            <div class="user-etc">
-              <p>질문자</p>
-              <p>5/26 21:10</p>
+            <div class="user-info">
+              <p class="user-one">질문자</p>
+              <p class="user-time">5/26 21:10</p>
             </div>
           </div>
 
@@ -43,11 +46,12 @@
             </div>
             <div class="comment-box">
               <img class="comment-img" src="../assets/icons/comment.svg" />
-              <p class="comment-text">좋아요 5개</p>
+              <p class="comment-text">답변 5개</p>
             </div>
             <div class="scrap-box">
               <img class="comment-img" src="../assets/icons/scrap.svg" />
-              <p class="comment-text">좋아요 5개</p>
+              <p class="comment-text">스크랩</p>
+              <p class="comment-text-none">취소</p>
             </div>
           </div>
         </section>
@@ -55,9 +59,9 @@
         <!-- 댓글 작성하기 -->
         <sectionn class="section-comment">
           <!-- 총 댓글 개수 -->
-          <p>답변 3</p>
+          <p class="comment-count">답변 3</p>
           <!-- 하나의 댓글 영역 -->
-          <div>
+          <div class="comment-item">
             <!-- 댓글 유저정보 -->
             <div class="comment-user-box">
               <img class="comment-user-img" src="../assets/icons/user.svg" />
@@ -67,20 +71,24 @@
                 src="../assets/icons/ellipsis-vertical-g.svg"
               />
             </div>
-
-            <p>답변 내용</p>
-            <!-- 댓글 작성 시간, like 갯수 -->
-            <div>
-              <p>25/05/26</p>
-              <div>
-                <img src="../assets/icons/heart-black.svg" />
-                <p>0</p>
+            <div class="comment-content">
+              <p class="comment-content-text">답변 내용</p>
+              <!-- 댓글 작성 시간, like 갯수 -->
+              <div class="comment-etc">
+                <p>25/05/26</p>
+                <div class="comment-like-box">
+                  <img
+                    class="comment-like-img"
+                    src="../assets/icons/heart-black.svg"
+                  />
+                  <p class="comment-like-count">0</p>
+                </div>
               </div>
             </div>
           </div>
 
           <!--두번째 댓글 영역-->
-          <div>
+          <div class="comment-item">
             <!-- 댓글 유저정보 -->
             <div class="comment-user-box">
               <img class="comment-user-img" src="../assets/icons/user.svg" />
@@ -90,37 +98,45 @@
                 src="../assets/icons/ellipsis-vertical-g.svg"
               />
             </div>
-
-            <p>답변 내용</p>
-            <!-- 댓글 작성 시간, like 갯수 -->
-            <div>
-              <p>25/05/26</p>
-              <div>
-                <img src="../assets/icons/heart-black.svg" />
-                <p>0</p>
+            <div class="comment-content">
+              <p class="comment-content-text">답변 내용</p>
+              <!-- 댓글 작성 시간, like 갯수 -->
+              <div class="comment-etc">
+                <p>25/05/26</p>
+                <div class="comment-like-box">
+                  <img
+                    class="comment-like-img"
+                    src="../assets/icons/heart-black.svg"
+                  />
+                  <p class="comment-like-count">0</p>
+                </div>
               </div>
             </div>
           </div>
 
           <!--대댓글 영역-->
-          <div>
+          <div class="re-comment-item">
             <!-- 댓글 유저정보 -->
             <div class="comment-user-box">
               <img class="comment-user-img" src="../assets/icons/user.svg" />
-              <p>익명 대댓글</p>
+              <p>익명</p>
               <img
                 class="comment-ellipsis-img"
                 src="../assets/icons/ellipsis-vertical-g.svg"
               />
             </div>
-
-            <p>답변 내용</p>
-            <!-- 댓글 작성 시간, like 갯수 -->
-            <div>
-              <p>25/05/26</p>
-              <div>
-                <img src="../assets/icons/heart-black.svg" />
-                <p>0</p>
+            <div class="comment-content">
+              <p class="comment-content-text">답변 내용</p>
+              <!-- 댓글 작성 시간, like 갯수 -->
+              <div class="comment-etc">
+                <p>25/05/26</p>
+                <div class="comment-like-box">
+                  <img
+                    class="comment-like-img"
+                    src="../assets/icons/heart-black.svg"
+                  />
+                  <p class="comment-like-count">0</p>
+                </div>
               </div>
             </div>
           </div>
