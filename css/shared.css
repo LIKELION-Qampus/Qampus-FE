@@ -70,6 +70,8 @@
   font-display: swap;
 }
 
+
+
 * {
   box-sizing: border-box;
 }
@@ -80,6 +82,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
+/* 모바일 화면크기 - 아이폰 17 기준 */
 .app {
   width: 402px;
   min-height: 874px;
@@ -87,6 +90,21 @@ body {
   background: #fff;
 }
 
+.main {
+  padding: 20px;
+}
+
+@media (min-width: 430px) {
+  .app {
+    max-width: 390px;
+    margin: 0 auto;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+  }
+}
+
+
+/* 공통 헤더 */
 .header {
   height: 56px;
   padding: 0 20px;
@@ -103,15 +121,3 @@ body {
   line-height: normal;
 }
 
-.main {
-  padding: 20px;
-}
-
-@media (min-width: 430px) {
-  .app {
-    max-width: 390px;
-    margin: 0 auto;
-    border-left: 1px solid #dddddd;
-    border-right: 1px solid #dddddd;
-  }
-}
