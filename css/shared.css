@@ -70,8 +70,6 @@
   font-display: swap;
 }
 
-
-
 * {
   box-sizing: border-box;
 }
@@ -103,7 +101,6 @@ body {
   }
 }
 
-
 /* 공통 헤더 */
 .header {
   height: 56px;
@@ -111,6 +108,7 @@ body {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #eeeeee;
+  gap: 10px;
 }
 
 .header h1 {
@@ -121,3 +119,13 @@ body {
   line-height: normal;
 }
 
+.head-left-img {
+  width: 24px;
+  height: 24px;
+}
+
+.head-right-img {
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+}
