@@ -10,13 +10,130 @@
   <body>
     <!-- 모바일 전용 화면 -->
     <div class="app">
+      <!-- 헤더: 질의 응답 -->
       <header class="header">
-        <img src="" />
+        <img class="chevorn-left" src="../assets/icons/chevron-left.svg" />
         <h1>질의 응답</h1>
+        <img class="ellipsis-b" src="../assets/icons/ellipsis-vertical-b.svg" />
       </header>
 
       <main class="main">
-        <h2>게시물 상세</h2>
+        <!-- 질문한 내용 영역 -->
+        <section class="section-content">
+          <!-- 질문자 유저정보 -->
+          <div class="content-user">
+            <img class="user-img" src="../assets/icons/user.svg" />
+            <div class="user-etc">
+              <p>질문자</p>
+              <p>5/26 21:10</p>
+            </div>
+          </div>
+
+          <!-- 질문 제목, 내용 -->
+          <div class="content-detail">
+            <h4>질문</h4>
+            <p>질문질문</p>
+          </div>
+
+          <!-- 좋아요, 댓글, 스크랩 영역 -->
+          <div class="reaction">
+            <div class="like-box">
+              <img class="like-img" src="../assets/icons/heart-blue.svg" />
+              <p class="like-text">좋아요 5개</p>
+            </div>
+            <div class="comment-box">
+              <img class="comment-img" src="../assets/icons/comment.svg" />
+              <p class="comment-text">좋아요 5개</p>
+            </div>
+            <div class="scrap-box">
+              <img class="comment-img" src="../assets/icons/scrap.svg" />
+              <p class="comment-text">좋아요 5개</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 댓글 작성하기 -->
+        <sectionn class="section-comment">
+          <!-- 총 댓글 개수 -->
+          <p>답변 3</p>
+          <!-- 하나의 댓글 영역 -->
+          <div>
+            <!-- 댓글 유저정보 -->
+            <div class="comment-user-box">
+              <img class="comment-user-img" src="../assets/icons/user.svg" />
+              <p>익명</p>
+              <img
+                class="comment-ellipsis-img"
+                src="../assets/icons/ellipsis-vertical-g.svg"
+              />
+            </div>
+
+            <p>답변 내용</p>
+            <!-- 댓글 작성 시간, like 갯수 -->
+            <div>
+              <p>25/05/26</p>
+              <div>
+                <img src="../assets/icons/heart-black.svg" />
+                <p>0</p>
+              </div>
+            </div>
+          </div>
+
+          <!--두번째 댓글 영역-->
+          <div>
+            <!-- 댓글 유저정보 -->
+            <div class="comment-user-box">
+              <img class="comment-user-img" src="../assets/icons/user.svg" />
+              <p>익명</p>
+              <img
+                class="comment-ellipsis-img"
+                src="../assets/icons/ellipsis-vertical-g.svg"
+              />
+            </div>
+
+            <p>답변 내용</p>
+            <!-- 댓글 작성 시간, like 갯수 -->
+            <div>
+              <p>25/05/26</p>
+              <div>
+                <img src="../assets/icons/heart-black.svg" />
+                <p>0</p>
+              </div>
+            </div>
+          </div>
+
+          <!--대댓글 영역-->
+          <div>
+            <!-- 댓글 유저정보 -->
+            <div class="comment-user-box">
+              <img class="comment-user-img" src="../assets/icons/user.svg" />
+              <p>익명 대댓글</p>
+              <img
+                class="comment-ellipsis-img"
+                src="../assets/icons/ellipsis-vertical-g.svg"
+              />
+            </div>
+
+            <p>답변 내용</p>
+            <!-- 댓글 작성 시간, like 갯수 -->
+            <div>
+              <p>25/05/26</p>
+              <div>
+                <img src="../assets/icons/heart-black.svg" />
+                <p>0</p>
+              </div>
+            </div>
+          </div>
+        </sectionn>
+        <section class="input-comment-box">
+          <input
+            class="input-comment"
+            type="text"
+            maxlength="200"
+            placeholder="답변을 입력해보세요"
+          />
+          <button class="submit" type="button">등록</button>
+        </section>
       </main>
     </div>
   </body>
