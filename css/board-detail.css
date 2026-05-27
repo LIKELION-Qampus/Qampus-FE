@@ -255,10 +255,6 @@
   font-weight: 500;
 }
 
-.hidden {
-  display: none;
-}
-
 .post-modal {
   display: flex;
   justify-content: flex-end;
@@ -300,6 +296,9 @@
   font-weight: 400;
   color: #000;
 }
+.post-menu-icon {
+  cursor: pointer;
+}
 
 .edit-button {
   border-radius: 10px 10px 0px 0px;
@@ -313,4 +312,35 @@
 .delete-icon {
   width: 16px;
   height: 16px;
+}
+
+/* active 아이콘은 기본적으로 숨김*/
+.edit-icon-active,
+.delete-icon-active {
+  display: none;
+  width: 16px;
+  height: 16px;
+}
+
+/* hover 중 버튼 스타일 */
+.edit-button:hover,
+.delete-button:hover {
+  color: #fff;
+  background: #2173f1;
+}
+
+/* hover 중에는 기본 아이콘 숨김 */
+.edit-button:hover .edit-icon,
+.delete-button:hover .delete-icon {
+  display: none;
+}
+
+.edit-button:hover .edit-icon-active,
+.delete-button:hover .delete-icon-active {
+  display: block;
+}
+
+/* 가장 아래에 */
+.hidden {
+  display: none;
 }

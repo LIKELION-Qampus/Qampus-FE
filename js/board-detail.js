@@ -24,6 +24,13 @@ const commentNum = document.querySelector(".comment-num");
 const emptyComment = document.querySelector(".empty-comment");
 const commentList = document.querySelector(".comment-list");
 
+//수정/삭제 모달
+const menuIcon = document.querySelector(".post-menu-icon");
+
+const modal = document.querySelector(".post-modal");
+const editBtn = document.querySelector(".edit-button");
+const deleteBtn = document.querySelector(".delete-button");
+
 let isLikeClicked = false;
 let isScrapClicked = false;
 
@@ -60,7 +67,7 @@ const scrapBox = () => {
 };
 
 //댓글 구현
-subMitBtn.addEventListener("click", () => {
+const addComment = () => {
   const commentValue = cmtInput.value.trim();
 
   if (commentValue === "") {
@@ -79,8 +86,15 @@ subMitBtn.addEventListener("click", () => {
   cmtCount.textContent = `답변 ${comments.length}개`;
   commentNum.textContent = comments.length;
 
-  commentInput.value = "";
-});
+  cmtInput.value = "";
+};
+
+//수정/삭제 모달
+const toggleModal = () => {
+  modal.classList.toggle("hidden");
+};
 
 likeBtn.addEventListener("click", likeBox);
 scrapBtn.addEventListener("click", scrapBox);
+subMitBtn.addEventListener("click", addComment);
+menuIcon.addEventListener("click", toggleModal);
