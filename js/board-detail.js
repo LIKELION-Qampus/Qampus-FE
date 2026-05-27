@@ -89,10 +89,15 @@ const addComment = () => {
   cmtInput.value = "";
 };
 
-//수정/삭제 모달
+//수정/삭제 모달 띄우기
 const toggleModal = () => {
   modal.classList.toggle("hidden");
 };
+
+//수정 버튼 페이지 이동
+editBtn.addEventListener("click", () => {
+  location.href = "./board-edit.html";
+});
 
 likeBtn.addEventListener("click", likeBox);
 scrapBtn.addEventListener("click", scrapBox);
