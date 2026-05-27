@@ -42,16 +42,27 @@
           <div class="reaction">
             <div class="like-box">
               <img class="like-img" src="../assets/icons/heart-blue.svg" />
-              <p class="like-text">좋아요 <span>5</span>개</p>
+              <img
+                class="like-img-fill"
+                src="../assets/icons/heart-blue-fill.svg"
+              />
+              <p class="like-text">좋아요 <span class="like-num">0</span>개</p>
             </div>
             <div class="comment-box">
               <img class="comment-img" src="../assets/icons/comment.svg" />
-              <p class="comment-text">답변 5개</p>
+              <p class="comment-text">
+                답변 <span class="comment-num">0</span>개
+              </p>
             </div>
             <div class="scrap-box">
-              <img class="comment-img" src="../assets/icons/scrap.svg" />
-              <p class="comment-text">스크랩</p>
-              <p class="comment-text-none">취소</p>
+              <img class="scrap-img" src="../assets/icons/scrap.svg" />
+              <img
+                class="scrap-img-fill"
+                src="../assets/icons/scrap-fill.svg"
+              />
+              <p class="scrap-text">
+                스크랩<span class="scrap-text-none"> 취소</span>
+              </p>
             </div>
           </div>
         </section>
@@ -153,4 +164,6 @@
       </main>
     </div>
   </body>
+
+  <script src="../js/board-detail.js"></script>
 </html>

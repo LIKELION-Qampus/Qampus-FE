@@ -65,9 +65,26 @@
 
 .reaction {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
   padding: 0px 10px;
+  gap: 20px;
+}
+
+.like-box,
+.comment-box,
+.scrap-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0px;
+
+  font-variant-numeric: tabular-nums;
+
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .like-box,
@@ -76,20 +93,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 10px 0px;
-
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.like-box,
-.comment-box,
-.scrap-box span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
 
   font-size: 14px;
   font-weight: 400;
@@ -101,8 +104,22 @@
   width: 15px;
   height: 15px;
 }
-.comment-text-none {
+
+.like-img-fill,
+.scrap-img-fill {
   display: none;
+  width: 15px;
+  height: 15px;
+}
+
+.scrap-text {
+  display: flex;
+  white-space: nowrap;
+}
+.scrap-text-none {
+  display: none;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 /* 댓글 영역*/
@@ -149,7 +166,7 @@
 .comment-content {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 5px;
   gap: 10px;
 }
 .comment-content-text {
