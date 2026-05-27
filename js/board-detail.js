@@ -11,6 +11,11 @@ const filScrapImg = document.querySelector(".scrap-img-fill");
 const scrapText = document.querySelector(".scrap-text");
 const scrapCancel = document.querySelector(".scrap-text-none");
 
+//댓글 입력창, 댓글 input, 등록 버튼
+const cmtBox = document.querySelector(".input-comment-box");
+const cmtInput = document.querySelector(".input-comment");
+const subMitBtn = document.querySelector(".submit");
+
 let isLikeClicked = false;
 let isScrapClicked = false;
 
@@ -43,6 +48,14 @@ const scrapBox = () => {
     scrapCancel.style.display = "none";
   }
 };
+
+//댓글 입력내용 alert
+subMitBtn.addEventListener("click", () => {
+  const commentValue = cmtInput.value.trim();
+
+  alert(commentValue);
+  commentInput.value = "";
+});
 
 likeBtn.addEventListener("click", likeBox);
 scrapBtn.addEventListener("click", scrapBox);
