@@ -5,16 +5,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../css/shared.css" />
+    <link rel="stylesheet" href="../css/board-detail.css" />
+    <link rel="stylesheet" href="../css/board-write.css" />
   </head>
   <body>
-    <!--모바일 전용 화면-->
+    <!-- 모바일 전용 화면 -->
     <div class="app">
+      <!-- 헤더: 질의 응답 -->
       <header class="header">
-        <h1>Qampus</h1>
+        <img
+          class="head-left-img post-cancel-icon"
+          src="../assets/icons/cancel.svg"
+        />
+        <h1>질문 올리기</h1>
+        <button class="post-ok-btn">완료</button>
       </header>
 
       <main class="main">
-        <h2>게시물 작성</h2>
+        <!-- 질문한 내용 영역 -->
+        <section class="section-content">
+          <!-- 질문자 유저정보 -->
+          <div class="content-user">
+            <img class="user-img" src="../assets/icons/user.svg" />
+            <div class="user-info">
+              <p class="user-one">질문자</p>
+              <p class="user-time">5/26 21:10</p>
+            </div>
+          </div>
+
+          <!-- 질문 제목, 내용 -->
+          <div class="content-detail">
+            <h4>질문</h4>
+            <p>질문질문</p>
+          </div>
+
+          <!-- 좋아요, 댓글, 스크랩 영역 -->
+          <div class="reaction">
+            <div class="like-box">
+              <img class="like-img" src="../assets/icons/heart-blue.svg" />
+              <img
+                class="like-img-fill"
+                src="../assets/icons/heart-blue-fill.svg"
+              />
+              <p class="like-text">좋아요 <span class="like-num">0</span>개</p>
+            </div>
+            <div class="comment-box">
+              <img class="comment-img" src="../assets/icons/comment.svg" />
+              <p class="comment-text">
+                답변 <span class="comment-num">0</span>개
+              </p>
+            </div>
+            <div class="scrap-box">
+              <img class="scrap-img" src="../assets/icons/scrap.svg" />
+              <img
+                class="scrap-img-fill"
+                src="../assets/icons/scrap-fill.svg"
+              />
+              <p class="scrap-text">
+                스크랩<span class="scrap-text-none"> 취소</span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 댓글 영역 -->
+        <sectionn class="section-comment">
+          <!-- 총 댓글 개수 -->
+          <p class="comment-count">답변 0</p>
+
+          <!-- 댓글 없을 때 화면 -->
+          <div class="empty-comment">
+            <img class="empty-img" src="../assets/icons/message.svg" />
+            <p>아직 작성된 답변이 없어요.</p>
+            <p>첫 답변을 남겨주세요</p>
+          </div>
+
+          <div class="comment-list hidden">
+            <!-- 하나의 댓글 영역 -->
+            <div class="comment-item">
+              <!-- 댓글 유저정보 -->
+              <div class="comment-user-box">
+                <img class="comment-user-img" src="../assets/icons/user.svg" />
+                <p>익명</p>
+                <img
+                  class="comment-ellipsis-img"
+                  src="../assets/icons/ellipsis-vertical-g.svg"
+                />
+              </div>
+              <div class="comment-content">
+                <p class="comment-content-text">답변 내용</p>
+                <!-- 댓글 작성 시간, like 갯수 -->
+                <div class="comment-etc">
+                  <p>25/05/26</p>
+                  <div class="comment-like-box">
+                    <img
+                      class="comment-like-img"
+                      src="../assets/icons/heart-black.svg"
+                    />
+                    <p class="comment-like-count">0</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--대댓글 영역-->
+            <div class="re-comment-item">
+              <!-- 댓글 유저정보 -->
+              <div class="comment-user-box">
+                <img class="comment-user-img" src="../assets/icons/user.svg" />
+                <p>익명</p>
+                <img
+                  class="comment-ellipsis-img"
+                  src="../assets/icons/ellipsis-vertical-g.svg"
+                />
+              </div>
+              <div class="comment-content">
+                <p class="comment-content-text">답변 내용</p>
+                <!-- 댓글 작성 시간, like 갯수 -->
+                <div class="comment-etc">
+                  <p>25/05/26</p>
+                  <div class="comment-like-box">
+                    <img
+                      class="comment-like-img"
+                      src="../assets/icons/heart-black.svg"
+                    />
+                    <p class="comment-like-count">0</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sectionn>
+
+        <!--댓글 입력창-->
+        <section class="input-comment-box">
+          <input
+            class="input-comment"
+            type="text"
+            maxlength="200"
+            placeholder="답변을 입력해보세요"
+          />
+          <button class="submit" type="button">등록</button>
+        </section>
+
+        <div class="post-modal hidden">
+          <div class="post-modal-box">
+            <button class="edit-button" type="button">
+              수정하기
+              <img class="edit-icon" src="../assets/icons/pencil-b.svg" />
+              <img
+                class="edit-icon-active"
+                src="../assets/icons/pencil-w.svg"
+              />
+            </button>
+            <button class="delete-button active" type="button">
+              삭제하기
+              <img class="delete-icon" src="../assets/icons/trash-b.svg" />
+              <img
+                class="delete-icon-active"
+                src="../assets/icons/trash-w.svg"
+              />
+            </button>
+          </div>
+        </div>
       </main>
     </div>
   </body>
