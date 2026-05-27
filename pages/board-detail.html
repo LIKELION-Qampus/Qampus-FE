@@ -12,7 +12,10 @@
     <div class="app">
       <!-- 헤더: 질의 응답 -->
       <header class="header">
-        <img class="head-left-img" src="../assets/icons/chevron-left.svg" />
+        <img
+          class="head-left-img post-menu-icon"
+          src="../assets/icons/chevron-left.svg"
+        />
         <h1>질의 응답</h1>
         <img
           class="head-right-img"
@@ -107,33 +110,6 @@
               </div>
             </div>
 
-            <!--두번째 댓글 영역-->
-            <div class="comment-item">
-              <!-- 댓글 유저정보 -->
-              <div class="comment-user-box">
-                <img class="comment-user-img" src="../assets/icons/user.svg" />
-                <p>익명</p>
-                <img
-                  class="comment-ellipsis-img"
-                  src="../assets/icons/ellipsis-vertical-g.svg"
-                />
-              </div>
-              <div class="comment-content">
-                <p class="comment-content-text">답변 내용</p>
-                <!-- 댓글 작성 시간, like 갯수 -->
-                <div class="comment-etc">
-                  <p>25/05/26</p>
-                  <div class="comment-like-box">
-                    <img
-                      class="comment-like-img"
-                      src="../assets/icons/heart-black.svg"
-                    />
-                    <p class="comment-like-count">0</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <!--대댓글 영역-->
             <div class="re-comment-item">
               <!-- 댓글 유저정보 -->
@@ -173,6 +149,19 @@
           />
           <button class="submit" type="button">등록</button>
         </section>
+
+        <div class="post-modal hidden">
+          <div class="post-modal-box">
+            <button class="edit-button">
+              수정하기
+              <img class="edit-icon" src="../assets/icons/pencil-b.svg" />
+            </button>
+            <button class="delete-button">
+              삭제하기
+              <img class="delete-icon" src="../assets/icons/trash-b.svg" />
+            </button>
+          </div>
+        </div>
       </main>
     </div>
   </body>

@@ -258,3 +258,59 @@
 .hidden {
   display: none;
 }
+
+.post-modal {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 999;
+}
+.post-modal-box {
+  position: absolute;
+  top: 47px;
+  right: 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 170px;
+  height: 77px;
+}
+
+.post-modal-box button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #d9d9d9;
+  background: #f6f8ff;
+
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000;
+}
+
+.edit-button {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.delete-button {
+  border-radius: 0px 0px 10px 10px;
+}
+
+.edit-icon,
+.delete-icon {
+  width: 16px;
+  height: 16px;
+}
