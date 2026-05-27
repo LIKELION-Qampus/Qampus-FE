@@ -11,7 +11,7 @@
   <body>
     <!-- 모바일 전용 화면 -->
     <div class="app">
-      <!-- 헤더: 질의 응답 -->
+      <!-- 헤더: 질문 올리기 및 완료버튼 -->
       <header class="header">
         <img
           class="head-left-img post-cancel-icon"
@@ -22,153 +22,73 @@
       </header>
 
       <main class="main">
-        <!-- 질문한 내용 영역 -->
-        <section class="section-content">
-          <!-- 질문자 유저정보 -->
-          <div class="content-user">
-            <img class="user-img" src="../assets/icons/user.svg" />
-            <div class="user-info">
-              <p class="user-one">질문자</p>
-              <p class="user-time">5/26 21:10</p>
-            </div>
-          </div>
-
-          <!-- 질문 제목, 내용 -->
-          <div class="content-detail">
-            <h4>질문</h4>
-            <p>질문질문</p>
-          </div>
-
-          <!-- 좋아요, 댓글, 스크랩 영역 -->
-          <div class="reaction">
-            <div class="like-box">
-              <img class="like-img" src="../assets/icons/heart-blue.svg" />
-              <img
-                class="like-img-fill"
-                src="../assets/icons/heart-blue-fill.svg"
-              />
-              <p class="like-text">좋아요 <span class="like-num">0</span>개</p>
-            </div>
-            <div class="comment-box">
-              <img class="comment-img" src="../assets/icons/comment.svg" />
-              <p class="comment-text">
-                답변 <span class="comment-num">0</span>개
-              </p>
-            </div>
-            <div class="scrap-box">
-              <img class="scrap-img" src="../assets/icons/scrap.svg" />
-              <img
-                class="scrap-img-fill"
-                src="../assets/icons/scrap-fill.svg"
-              />
-              <p class="scrap-text">
-                스크랩<span class="scrap-text-none"> 취소</span>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- 댓글 영역 -->
-        <sectionn class="section-comment">
-          <!-- 총 댓글 개수 -->
-          <p class="comment-count">답변 0</p>
-
-          <!-- 댓글 없을 때 화면 -->
-          <div class="empty-comment">
-            <img class="empty-img" src="../assets/icons/message.svg" />
-            <p>아직 작성된 답변이 없어요.</p>
-            <p>첫 답변을 남겨주세요</p>
-          </div>
-
-          <div class="comment-list hidden">
-            <!-- 하나의 댓글 영역 -->
-            <div class="comment-item">
-              <!-- 댓글 유저정보 -->
-              <div class="comment-user-box">
-                <img class="comment-user-img" src="../assets/icons/user.svg" />
-                <p>익명</p>
-                <img
-                  class="comment-ellipsis-img"
-                  src="../assets/icons/ellipsis-vertical-g.svg"
-                />
-              </div>
-              <div class="comment-content">
-                <p class="comment-content-text">답변 내용</p>
-                <!-- 댓글 작성 시간, like 갯수 -->
-                <div class="comment-etc">
-                  <p>25/05/26</p>
-                  <div class="comment-like-box">
-                    <img
-                      class="comment-like-img"
-                      src="../assets/icons/heart-black.svg"
-                    />
-                    <p class="comment-like-count">0</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!--대댓글 영역-->
-            <div class="re-comment-item">
-              <!-- 댓글 유저정보 -->
-              <div class="comment-user-box">
-                <img class="comment-user-img" src="../assets/icons/user.svg" />
-                <p>익명</p>
-                <img
-                  class="comment-ellipsis-img"
-                  src="../assets/icons/ellipsis-vertical-g.svg"
-                />
-              </div>
-              <div class="comment-content">
-                <p class="comment-content-text">답변 내용</p>
-                <!-- 댓글 작성 시간, like 갯수 -->
-                <div class="comment-etc">
-                  <p>25/05/26</p>
-                  <div class="comment-like-box">
-                    <img
-                      class="comment-like-img"
-                      src="../assets/icons/heart-black.svg"
-                    />
-                    <p class="comment-like-count">0</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </sectionn>
-
-        <!--댓글 입력창-->
-        <section class="input-comment-box">
+        <!-- 새 질문 작성 폼 -->
+        <form class="write-post-form">
           <input
-            class="input-comment"
             type="text"
-            maxlength="200"
-            placeholder="답변을 입력해보세요"
+            class="form-title"
+            placeholder="제목을 입력해주세요."
           />
-          <button class="submit" type="button">등록</button>
-        </section>
+          <textarea
+            type="text"
+            autocomplete="off"
+            class="form-content"
+            placeholder="궁금한 내용을 자세히 적어주세요. 구체적일수록 더 좋은 답변을 받을 수 있어요. "
+          ></textarea>
+        </form>
 
-        <div class="post-modal hidden">
-          <div class="post-modal-box">
-            <button class="edit-button" type="button">
-              수정하기
-              <img class="edit-icon" src="../assets/icons/pencil-b.svg" />
-              <img
-                class="edit-icon-active"
-                src="../assets/icons/pencil-w.svg"
-              />
-            </button>
-            <button class="delete-button active" type="button">
-              삭제하기
-              <img class="delete-icon" src="../assets/icons/trash-b.svg" />
-              <img
-                class="delete-icon-active"
-                src="../assets/icons/trash-w.svg"
-              />
-            </button>
+        <!--작성 가이드-->
+        <section class="write-guide">
+          <ul class="select-category">
+            <li>#수업</li>
+            <li>#학교 프로그램</li>
+            <li>#행정·절차</li>
+            <li>#기타</li>
+          </ul>
+          <div class="text-guide">
+            ※ 질문 내용 관련 유의사항
+            <p class="text-guide">
+              · 질문의 제목과 본문은 내용을 명확히 알 수 있도록 작성해 주세요.
+              <br />
+              · 동일하거나 유사한 질문을 반복적으로 게시하는 행위는 제한될 수
+              있습니다. <br />
+              · 허위 정보, 확인되지 않은 소문, 오해를 불러일으킬 수 있는 내용은
+              작성하지 말아 주세요. <br />
+              · 특정 개인, 단체, 기관을 비방하거나 명예를 훼손하는 내용은
+              금지됩니다. <br />
+              · 개인정보, 연락처, 계정 정보 등 타인의 사생활을 침해할 수 있는
+              내용은 게시할 수 없습니다.
+            </p>
           </div>
-        </div>
+
+          <div class="text-guide">
+            ※ 첨부파일 및 이미지 관련 유의사항
+            <p class="text-guide">
+              · 저작권을 침해하거나 무단으로 공유된 자료는 첨부할 수 없습니다.
+              <br />
+              · 타인의 얼굴, 이름, 연락처, 학번 등 식별 가능한 정보가 포함된
+              이미지는 게시하지 말아 주세요. <br />
+              · 게시글 내용과 무관한 이미지 또는 불쾌감을 줄 수 있는 이미지는
+              제한될 수 있습니다.
+            </p>
+          </div>
+        </section>
+        <section class="footer-attach">
+          <!--이미지 삽입-->
+          <label for="imageInput">
+            <img src="../assets/icons/album.svg" />
+          </label>
+          <input type="file" accept="image/*" id="imageInput" />
+
+          <!--파일 삽입-->
+          <label for="fileInput">
+            <img src="../assets/icons/attach.svg" />
+          </label>
+          <input type="file" id="fileInput" />
+        </section>
       </main>
     </div>
   </body>
+
+  <script src="../js/board-write.js"></script>
 </html>
