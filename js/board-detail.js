@@ -16,8 +16,18 @@ const cmtBox = document.querySelector(".input-comment-box");
 const cmtInput = document.querySelector(".input-comment");
 const subMitBtn = document.querySelector(".submit");
 
+//뎃글 총 갯수
+const cmtCount = document.querySelector(".comment-count");
+const commentNum = document.querySelector(".comment-num");
+
+//댓글 없을 때 영역
+const emptyComment = document.querySelector(".empty-comment");
+const commentList = document.querySelector(".comment-list");
+
 let isLikeClicked = false;
 let isScrapClicked = false;
+
+let comments = [];
 
 //좋아요 버튼 구현
 const likeBox = () => {
@@ -49,11 +59,26 @@ const scrapBox = () => {
   }
 };
 
-//댓글 입력내용 alert
+//댓글 구현
 subMitBtn.addEventListener("click", () => {
   const commentValue = cmtInput.value.trim();
 
+  if (commentValue === "") {
+    alert("댓글을 입력해주세요.");
+    return;
+  }
+
+  //입력값 확인용 - 연동 전 수정 예정입니다.
   alert(commentValue);
+
+  comments.push(commentValue);
+
+  emptyComment.classList.add("hidden");
+  commentList.classList.remove("hidden");
+
+  cmtCount.textContent = `답변 ${comments.length}개`;
+  commentNum.textContent = comments.length;
+
   commentInput.value = "";
 });
 
