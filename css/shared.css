@@ -103,9 +103,9 @@ body {
   line-height: normal;
 }
 
-.main {
+/* .main {
   padding: 20px;
-}
+} */
 
 @media (min-width: 430px) {
   .app {
