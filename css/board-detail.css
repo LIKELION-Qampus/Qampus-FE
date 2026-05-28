@@ -186,6 +186,7 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+  font-variant-numeric: tabular-nums;
 }
 
 .comment-like-img {
@@ -338,6 +339,11 @@
 .edit-button:hover .edit-icon-active,
 .delete-button:hover .delete-icon-active {
   display: block;
+}
+
+.comment-like-active {
+  width: 12px;
+  height: 12px;
 }
 
 /* 가장 아래에 */

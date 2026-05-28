@@ -31,14 +31,22 @@ const modal = document.querySelector(".post-modal");
 const editBtn = document.querySelector(".edit-button");
 const deleteBtn = document.querySelector(".delete-button");
 
+//댓글 좋아요기능
+const commentLikeBox = document.querySelector(".comment-like-box");
+const commentLikeCount = document.querySelector(".comment-like-count");
+const activeLike = document.querySelector(".comment-like-active");
+const defaultLike = document.querySelector(".comment-like-img");
+
 let isLikeClicked = false;
 let isScrapClicked = false;
 
 let comments = [];
+let isCommentLiked = false;
 
 //좋아요 버튼 구현
 const likeBox = () => {
   if (isLikeClicked === false) {
+    tt;
     isLikeClicked = true;
     likeImg.style.display = "none";
     filLikeImg.style.display = "block";
@@ -76,13 +84,14 @@ const addComment = () => {
   }
 
   //입력값 확인용 - 연동 전 수정 예정입니다.
-  alert(commentValue);
+  //alert(commentValue);
 
   comments.push(commentValue);
 
   emptyComment.classList.add("hidden");
   commentList.classList.remove("hidden");
 
+  //답변 갯수 구현
   cmtCount.textContent = `답변 ${comments.length}개`;
   commentNum.textContent = comments.length;
 
@@ -99,7 +108,32 @@ editBtn.addEventListener("click", () => {
   location.href = "./board-edit.html";
 });
 
+
+const toggleLike = () => {
+  const currentLike = Number(commentLikeCount.textContent);
+
+  if (isCommentLiked === false) {
+    
+    isCommentLiked = true;
+    
+    commentLikeCount.textContent = currentLike + 1;
+
+    defaultLike.classList.add("hidden");
+    activeLike.classList.remove("hidden");
+
+  } else if (isCommentLiked === true) {
+
+    isCommentLiked = false;
+    
+    commentLikeCount.textContent = currentLike - 1;
+
+    defaultLike.classList.remove("hidden");
+    activeLike.classList.add("hidden");
+  }
+};
+
 likeBtn.addEventListener("click", likeBox);
 scrapBtn.addEventListener("click", scrapBox);
 subMitBtn.addEventListener("click", addComment);
 menuIcon.addEventListener("click", toggleModal);
+commentLikeBox.addEventListener("click", toggleLike);
