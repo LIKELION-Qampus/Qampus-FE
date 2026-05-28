@@ -72,12 +72,12 @@
 
 * {
   box-sizing: border-box;
+  font-family: Pretendard;
 }
 
 body {
   margin: 0;
   background-color: #ebebeb;
-  font-family: Pretendard;
 }
 
 /* 모바일 화면크기 - 아이폰 17 기준 */
@@ -101,28 +101,34 @@ body {
 /* 공통 헤더 */
 .header {
   height: 56px;
-  padding: 0 20px;
+  padding: 0px 20px;
   display: flex;
   align-items: center;
+
   border-bottom: 1px solid #eeeeee;
   gap: 10px;
+  position: relative;
 }
 
 .header h1 {
-  margin: 0;
-  font-size: 20px;
-  font-style: normal;
+  position: absolute;
+  left: 52px;
+
+  font-size: 18px;
   font-weight: 500;
-  line-height: normal;
+  line-height: 1;
 }
 
 .head-left-img {
+  position: absolute;
+  left: 20px;
   width: 24px;
   height: 24px;
 }
 
 .head-right-img {
+  position: absolute;
+  right: 20px;
   width: 24px;
   height: 24px;
-  margin-left: auto;
 }
