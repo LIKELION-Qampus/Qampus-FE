@@ -31,6 +31,10 @@ const modal = document.querySelector(".post-modal");
 const editBtn = document.querySelector(".edit-button");
 const deleteBtn = document.querySelector(".delete-button");
 
+const confirmOverlay = document.querySelector('.delete-confirm-overlay');
+const btnNo = document.querySelector('.btn-no');
+const btnYes = document.querySelector('.btn-yes');
+
 let isLikeClicked = false;
 let isScrapClicked = false;
 
@@ -103,3 +107,19 @@ likeBtn.addEventListener("click", likeBox);
 scrapBtn.addEventListener("click", scrapBox);
 subMitBtn.addEventListener("click", addComment);
 menuIcon.addEventListener("click", toggleModal);
+
+// 삭제 모달 기능 구현
+deleteBtn.addEventListener("click", () => {
+  modal.classList.add("hidden"); // 점세개 팝업은 닫고
+  confirmOverlay.classList.remove("hidden"); // 삭제 확인 모달 열기
+});
+
+btnNo.addEventListener("click", () => {
+  confirmOverlay.classList.add("hidden"); // 삭제 취소 (모달 닫기)
+});
+
+btnYes.addEventListener("click", () => {
+  alert('게시글이 삭제되었습니다.');
+  confirmOverlay.classList.add("hidden");
+  location.href = '../html/board-list.html'; // 삭제 후 게시판 목록으로 이동
+});
