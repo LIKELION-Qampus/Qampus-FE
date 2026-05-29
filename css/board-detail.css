@@ -345,6 +345,7 @@
   display: none;
 }
 
+/* 게시글 삭제 기능 관련 css입니다!*/
 .delete-confirm-overlay {
   position: fixed;
   top: 0;
@@ -406,4 +407,18 @@
 /* 왼쪽 '예' 버튼에만 우측 세로선 추가 */
 .btn-yes {
   border-right: 1px solid #D9D9D9;
+}
+
+/*댓글 / 대댓글 삭제 관련 css 입니다!*/
+.comment-item, .re-comment-item {
+  position: relative; /* 팝업 위치의 기준점이 됨 */
+}
+
+.comment-modal-wrapper {
+  position: absolute;
+  top: 35px; /* 점세개 아이콘 바로 아래 */
+  right: 0;
+  z-index: 100; /* 다른 내용보다 위에 뜨도록 설정 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 10px;
 }
