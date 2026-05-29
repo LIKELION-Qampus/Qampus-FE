@@ -1,38 +1,71 @@
 .header {
     justify-content: space-between;
-    height: 75px;
 }
 
-.headerAlignBox_left {
+.head-left {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.headerAlignBox_left > img {
+.head-left-img {
     width: 28px;
     height: 28px;
     margin-right: 14px;
 }
 
-.headerAlignBox_left > h1 {
+.header h1 {
     color: #000;
-    font-weight: 600;
 }
 
-.headerAlignBox_right {
+.head-right {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.headerAlignBox_right > img {
+.head-right-img1 {
     width: 24px;
     height: 24px;
 }
 
-.dots {
+.head-right > button {
     margin-left: 18px;
+    background-color: transparent;
+    border: none;
+}
+
+.popupPostBtn {
+    display: none;
+
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 180px;
+    height: 37px;
+    padding: 10px 21px;
+
+    border-radius: 10px;
+    border: 1px solid #D9D9D9;
+    background-color: #F2F5FA;
+
+    position: absolute;
+
+    margin-left: 200px;
+}
+
+.popupPostBtn > p {
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.popupPostBtn > img {
+    width: 16px;
+    height: 16px;
 }
 
 .navigation {
@@ -70,7 +103,7 @@
     width: 44px;
     height: 2px;
     
-    background-color: #2F5DF5;
+    background-color: #2173F1;
 }
 
 #howtolist {
@@ -101,6 +134,53 @@
     width: 6px;
     height: 3px;
     align-items: center;
+}
+
+.howtolistPopup {
+    position: absolute;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100px;
+    height: 54px;
+
+    border-radius: 10px;
+    border: 1px solid #D9D9D9;
+    background: #F2F5FA;
+
+    margin-left: 20px;
+    margin-top: 1px;
+}
+
+.recent {
+    color: #000;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color:#F2F5FA;
+
+    margin: 0px;
+    padding: 7px 33px 5px 33px;
+    border-radius: 0 0 10px 10px;
+    height: 26px;
+
+}
+
+.recommend {
+    color: #FFFFFF;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: #2173f1;
+
+    margin: 0px;
+    padding: 7px 33px 5px 33px;
+    border-radius: 10px 10px 0 0;
+    height: 26px;
 }
 
 .post {

@@ -11,16 +11,23 @@
     <!--모바일 전용 화면-->
     <div class="app">
       <header class="header">
-        <div class="headerAlignBox_left">
-          <img src="../assets/icons/ChatsCircle.svg" alt="헤더채팅아이콘">
+        <div class="head-left">
+          <img class="head-left-img" src="../assets/icons/ChatsCircle.svg" alt="헤더채팅아이콘">
           <h1>질의응답</h1>
         </div>
 
-        <div class="headerAlignBox_right">
-          <img src="../assets/icons/search.svg" alt="헤더돋보기아이콘">
-          <img class="dots" src="../assets/icons/ellipsis-vertical-b.svg" alt="헤더점세개아이콘">
+        <div class="head-right">
+          <img class="head-right-img1" src="../assets/icons/search.svg" alt="헤더돋보기아이콘">
+          <button>
+            <img class="head-right-img2" src="../assets/icons/ellipsis-vertical-b.svg" alt="헤더점세개아이콘">
+          </button>
         </div>
       </header>
+      
+      <div class="popupPostBtn">
+        <p>질문 올리기</p>
+        <img src="../assets/icons/pencil-b.svg">
+      </div>
 
       <nav class="navigation">
         <div class="selected_category">전체</div>
@@ -35,6 +42,11 @@
         <div id="howtolist">
           <p>추천순</p>
           <img src="../assets/icons/downvector.svg" alt="선택된상태에서의화살표">
+        </div>
+
+        <div class="howtolistPopup">
+          <p class="recommend">추천순</p>
+          <p class="recent">최신순</p>
         </div>
 
         <div class="bigBoxForpost">
