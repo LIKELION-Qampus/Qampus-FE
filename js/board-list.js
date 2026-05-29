@@ -114,10 +114,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
     // 질문 올리기 버튼
     popupPostBtn.addEventListener('click', () => {
-      window.location.href = '../html/board-write.html';
+      window.location.href = '../pages/board-write.html';
     });
   
     postBtn.addEventListener('click', () => {
-      window.location.href = '../html/board-write.html';
+      window.location.href = '../pages/board-write.html';
     });
   });
