@@ -16,6 +16,7 @@
 
 .header h1 {
     color: #000;
+    margin-left: 14px;
 }
 
 .head-right {
@@ -24,7 +25,7 @@
     align-items: center;
 }
 
-.head-right-img1 {
+.head-right-img1, .head-right-img2 {
     width: 24px;
     height: 24px;
 }
@@ -181,6 +182,28 @@
     padding: 7px 33px 5px 33px;
     border-radius: 10px 10px 0 0;
     height: 26px;
+}
+
+.none-post-notice {
+    width: 280px;
+    height: 65px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    color: #7B7B7B;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    margin-left: 55px;
+    margin-top: 260px;
+
 }
 
 .post {
