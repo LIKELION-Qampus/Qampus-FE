@@ -39,17 +39,22 @@
       <div class="selected_line"></div>
 
       <main class="main">
-        <div id="howtolist">
+        <button id="howtolist">
           <p>추천순</p>
-          <img src="../assets/icons/downvector.svg" alt="선택된상태에서의화살표">
-        </div>
+          <img src="../assets/icons/downvector.svg" alt="아래방향화살표">
+        </button>
 
         <div class="howtolistPopup">
           <p class="recommend">추천순</p>
           <p class="recent">최신순</p>
         </div>
 
-        <div class="bigBoxForpost">
+        <p class="none-post-notice">
+          아직 작성된 질문이 없어요. <br/><br/>
+          수업에 대해 궁금한 건 무엇이든 질문하세요!
+        </p>
+
+        <div class="bigBoxForpost" data-category="수업">
           <div class="post">
             <p class="postTitle">(질문1) 질문제목입니다.</p>
             <p class="postContent">(질문내용1) 질문내용입니다.</p>
@@ -73,7 +78,7 @@
           </div>
         </div>
 
-        <div class="bigBoxForpost">
+        <div class="bigBoxForpost" data-category="수업">
           <div class="post">
             <p class="postTitle">(질문2) 15자 초과시 어떻게 작동하는지 확인하기 위한 질문제목입니다.</p>
             <p class="postContent">(질문내용2) 20자 초과시 어떻게 작동하는지 확인하기 위한 질문내용입니다.</p>
@@ -97,7 +102,7 @@
           </div>
         </div>
 
-        <div class="bigBoxForpost">
+        <div class="bigBoxForpost" data-category="수업">
           <div class="post">
             <p class="postTitle">(질문3) 질문제목입니다.</p>
             <p class="postContent">(질문내용3) 질문내용입니다.</p>
@@ -121,7 +126,7 @@
           </div>
         </div>
 
-        <div class="bigBoxForpost">
+        <div class="bigBoxForpost" data-category="수업">
           <div class="post">
             <p class="postTitle">(질문4) 질문제목입니다.</p>
             <p class="postContent">(질문내용4) 질문내용입니다.</p>
@@ -145,7 +150,7 @@
           </div>
         </div>
 
-        <div class="bigBoxForpost">
+        <div class="bigBoxForpost" data-category="수업">
           <div class="post">
             <p class="postTitle">(질문5) 질문제목입니다.</p>
             <p class="postContent">(질문내용5) 질문내용입니다.</p>
@@ -169,7 +174,7 @@
           </div>
         </div>
 
-        <div class="bigBoxForpost">
+        <div class="bigBoxForpost" data-category="수업">
           <div class="post">
             <p class="postTitle">(질문6) 질문제목입니다.</p>
             <p class="postContent">(질문내용6) 질문내용입니다.</p>
@@ -198,7 +203,7 @@
         <img src="../assets/icons/pencil-w.svg" alt="질문 올리기">
         <p class="uploadQuestion">질문 올리기</p>
       </div>
-      
     </div>
+    <script src="../js/board-list.js"></script>ㄴ
   </body>
 </html>
