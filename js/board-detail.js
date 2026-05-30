@@ -129,9 +129,11 @@ const addComment = () => {
 const toggleModal = () => {
   modalTarget = "post";
   modal.classList.remove("comment-option-modal");
+
   modal.style.top = "";
   modal.style.left = "";
   modal.style.right = "";
+
   modal.classList.toggle("hidden");
 };
 
@@ -221,18 +223,6 @@ const resetCommentLike = (comment) => {
   likeImg.src = "../assets/icons/heart-black.svg";
 };
 
-//대댓글 버튼 만들기
-const addReplyButton = (comment) => {
-  const commentEtc = comment.querySelector(".comment-etc");
-  const replyBtn = document.createElement("button");
-
-  replyBtn.type = "button";
-  replyBtn.classList.add("reply-button");
-  replyBtn.textContent = "답글 달기";
-
-  commentEtc.appendChild(replyBtn);
-};
-
 //댓글 화면에 추가
 const addCommentView = () => {
   const commentValue = cmtInput.value.trim();
@@ -268,7 +258,6 @@ const addCommentView = () => {
   resetCommentLike(newComment);
 
   if (replyTarget === null) {
-    addReplyButton(newComment);
     commentList.appendChild(newComment);
   } else {
     replyTarget.insertAdjacentElement("afterend", newComment);
@@ -294,9 +283,37 @@ const setReplyMode = (targetReplyBtn) => {
 //댓글 점세개 모달 위치 잡기
 const setCommentModalPosition = (targetEllipsis) => {
   const iconPosition = targetEllipsis.getBoundingClientRect();
+  const app = document.querySelector(".app");
+  const appPosition = app.getBoundingClientRect();
+
   const modalWidth = 130;
-  const modalTop = iconPosition.bottom + 6;
-  const modalLeft = iconPosition.right - modalWidth;
+  const modalHeight = 77;
+  const gap = 8;
+
+  let modalTop = iconPosition.bottom + 6;
+  let modalLeft = iconPosition.right - modalWidth;
+
+  const minLeft = appPosition.left + gap;
+  const maxLeft = appPosition.right - modalWidth - gap;
+
+  const minTop = appPosition.top + gap;
+  const maxTop = appPosition.bottom - modalHeight - gap;
+
+  if (modalLeft < minLeft) {
+    modalLeft = minLeft;
+  }
+
+  if (modalLeft > maxLeft) {
+    modalLeft = maxLeft;
+  }
+
+  if (modalTop < minTop) {
+    modalTop = minTop;
+  }
+
+  if (modalTop > maxTop) {
+    modalTop = iconPosition.top - modalHeight - 6;
+  }
 
   modal.classList.add("comment-option-modal");
   modal.style.top = `${modalTop}px`;
