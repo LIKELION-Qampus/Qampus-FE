@@ -1,282 +1,383 @@
-// 버튼 및 요소 가져오기
+//좋아요 영역, 하트 이미지, 좋아요 갯수
 const likeBtn = document.querySelector(".like-box");
 const likeImg = document.querySelector(".like-img");
 const filLikeImg = document.querySelector(".like-img-fill");
 const likeNum = document.querySelector(".like-num");
 
+//스크랩 영역, 스크랩 이미지
 const scrapBtn = document.querySelector(".scrap-box");
 const scrapImg = document.querySelector(".scrap-img");
 const filScrapImg = document.querySelector(".scrap-img-fill");
+const scrapText = document.querySelector(".scrap-text");
 const scrapCancel = document.querySelector(".scrap-text-none");
 
+//댓글 입력창, 댓글 input, 등록 버튼
+const cmtBox = document.querySelector(".input-comment-box");
 const cmtInput = document.querySelector(".input-comment");
 const subMitBtn = document.querySelector(".submit");
+
+//뎃글 총 갯수
 const cmtCount = document.querySelector(".comment-count");
 const commentNum = document.querySelector(".comment-num");
+
+//댓글 없을 때 영역
 const emptyComment = document.querySelector(".empty-comment");
 const commentList = document.querySelector(".comment-list");
 
+//수정,삭제 모달
 const menuIcon = document.querySelector(".post-menu-icon");
+
 const modal = document.querySelector(".post-modal");
 const editBtn = document.querySelector(".edit-button");
 const deleteBtn = document.querySelector(".delete-button");
 
-const confirmOverlay = document.querySelector('.delete-confirm-overlay');
-const btnNo = document.querySelector('.btn-no');
-const btnYes = document.querySelector('.btn-yes');
+//댓글 좋아요기능
+const commentLikeBox = document.querySelector(".comment-like-box");
+const commentLikeCount = document.querySelector(".comment-like-count");
+const activeLike = document.querySelector(".comment-like-active");
+const defaultLike = document.querySelector(".comment-like-img");
+
+//삭제확인 모달
+const confirmOverlay = document.querySelector(".delete-confirm-overlay");
+const btnNo = document.querySelector(".btn-no");
+const btnYes = document.querySelector(".btn-yes");
+
+//댓글 템플릿 영역
+const commentTemplate = document.querySelector(".comment-item").cloneNode(true);
+const reCommentTemplate = document
+  .querySelector(".re-comment-item")
+  .cloneNode(true);
 
 let isLikeClicked = false;
 let isScrapClicked = false;
 
-// 대댓글 모드 상태 관리 변수
-let replyTargetId = null;
+let comments = [];
+let isCommentLiked = false;
 
-let comments = [
-  {
-    id: 1,
-    author: '익명 2',
-    content: '답변내용답변내용답변내용답변내용',
-    date: '2026-04-26T10:00:00',
-    likes: 0,
-    isLiked: false,
-    replies: [
-      {
-        id: 11,
-        author: '익명 3',
-        content: '답변내용답변내용답변내용답변내용답변내용',
-        date: '2026-04-26T11:00:00',
-        likes: 0,
-        isLiked: false,
-      }
-    ]
+//대댓글, 수정, 삭제 상태 변수
+let replyTarget = null;
+let editTarget = null;
+let modalTarget = "post";
+let deleteTarget = null;
+
+//좋아요 버튼 구현
+const likeBox = () => {
+  if (isLikeClicked === false) {
+    isLikeClicked = true;
+    likeImg.style.display = "none";
+    filLikeImg.style.display = "block";
+    likeNum.textContent = Number(likeNum.textContent) + 1;
+  } else {
+    isLikeClicked = false;
+    likeImg.style.display = "block";
+    filLikeImg.style.display = "none";
+    likeNum.textContent = Number(likeNum.textContent) - 1;
   }
-];
-
-const formatDate = (dateString) => {
-  const d = new Date(dateString);
-  return `${String(d.getFullYear()).slice(2)}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
 };
 
-// 템플릿 생성 시 부모 댓글에만 '답글 달기' 버튼 추가 + 댓글 / 대댓글 하트 누르면 색 변경
-const generateCommentHTML = (item, isReply = false) => {
-  const className = isReply ? "re-comment-item" : "comment-item";
-  
-  const replyBtnHTML = !isReply 
-    ? `<button class="reply-trigger-btn" data-id="${item.id}" style="background:none; border:none; color:#7B7B7B; font-size:11px; font-weight:600; cursor:pointer; margin-left:10px;">답글 달기</button>` 
-    : '';
-
-  // 좋아요 상태에 따라 하트 이미지 경로 결정
-  const heartIconSrc = item.isLiked ? '../assets/icons/heart-blue-fill.svg' : '../assets/icons/heart-black.svg';
-
-  return `
-    <div class="${className}">
-      <div class="comment-user-box">
-        <img class="comment-user-img" src="../assets/icons/user.svg" />
-        <p>${item.author}</p>
-        <img class="comment-ellipsis-img" src="../assets/icons/ellipsis-vertical-g.svg" data-id="${item.id}" style="cursor:pointer;" />
-      </div>
-      
-      <div class="comment-modal-wrapper hidden" id="comment-modal-${item.id}">
-        <div class="post-modal-box" style="position: static; width: 140px; height: auto;">
-          <button class="edit-button comment-edit-btn" type="button">
-            수정하기
-            <img class="edit-icon" src="../assets/icons/pencil-b.svg" />
-            <img class="edit-icon-active" src="../assets/icons/pencil-w.svg" />
-          </button>
-          <button class="delete-button comment-delete-btn" type="button" data-id="${item.id}">
-            삭제하기
-            <img class="delete-icon" src="../assets/icons/trash-b.svg" />
-            <img class="delete-icon-active" src="../assets/icons/trash-w.svg" />
-          </button>
-        </div>
-      </div>
-
-      <div class="comment-content">
-        <p class="comment-content-text">${item.content}</p>
-        <div class="comment-etc">
-          <p>${formatDate(item.date)}</p>
-          <div class="comment-like-box">
-            <img class="comment-like-img" src="${heartIconSrc}" data-id="${item.id}" style="cursor:pointer;" />
-            <p class="comment-like-count">${item.likes}</p>
-          </div>
-          ${replyBtnHTML}
-        </div>
-      </div>
-    </div>
-  `;
+//스크랩 버튼 구현
+const scrapBox = () => {
+  if (isScrapClicked === false) {
+    isScrapClicked = true;
+    scrapImg.style.display = "none";
+    filScrapImg.style.display = "block";
+    scrapCancel.style.display = "block";
+  } else {
+    isScrapClicked = false;
+    scrapImg.style.display = "block";
+    filScrapImg.style.display = "none";
+    scrapCancel.style.display = "none";
+  }
 };
 
-const renderComments = () => {
-  if (comments.length === 0) {
-    emptyComment.classList.remove("hidden");
-    commentList.classList.add("hidden");
-    cmtCount.textContent = `답변 0`;
-    commentNum.textContent = "0";
+//댓글 구현
+const addComment = () => {
+  const commentValue = cmtInput.value.trim();
+
+  if (commentValue === "") {
+    alert("댓글을 입력해주세요.");
     return;
   }
 
+  //입력값 확인용 - 연동 전 수정 예정입니다.
+  //alert(commentValue);
+
+  comments.push(commentValue);
+
   emptyComment.classList.add("hidden");
   commentList.classList.remove("hidden");
-  
-  let totalCount = 0;
-  commentList.innerHTML = ''; 
 
-  comments.forEach(comment => {
-    totalCount++;
-    let html = generateCommentHTML(comment, false);
+  //답변 갯수 구현
+  cmtCount.textContent = `답변 ${comments.length}개`;
+  commentNum.textContent = comments.length;
 
-    if (comment.replies && comment.replies.length > 0) {
-      comment.replies.forEach(reply => {
-        totalCount++;
-        html += generateCommentHTML(reply, true);
-      });
-    }
-    commentList.insertAdjacentHTML('beforeend', html);
-  });
-
-  cmtCount.textContent = `답변 ${totalCount}`;
-  commentNum.textContent = totalCount;
-};
-
-// 대댓글 로직이 포함된 새 댓글 등록 함수
-const addComment = () => {
-  const commentValue = cmtInput.value.trim();
-  if (commentValue === "") return alert("답변을 입력해주세요.");
-
-  const newComment = {
-    id: Date.now(),
-    author: '익명(나)', 
-    content: commentValue,
-    date: new Date().toISOString(), 
-    likes: 0,
-    isLiked: false,
-    replies: [] // 새 부모 댓글일 경우를 대비해 빈 배열 추가
-  };
-
-  if (replyTargetId !== null) {
-    // 타겟 ID가 있으면 해당 부모 댓글을 찾아서 replies 배열에 푸시
-    const parent = comments.find(c => c.id === replyTargetId);
-    if (parent) {
-      if (!parent.replies) parent.replies = [];
-      parent.replies.push(newComment);
-    }
-    // 등록 후 대댓글 모드 해제
-    replyTargetId = null;
-    cmtInput.placeholder = "답변을 입력해보세요";
-  } else {
-    // 타겟 ID가 없으면 일반 최상위 댓글로 푸시
-    comments.push(newComment);
-  }
-
-  renderComments(); 
   cmtInput.value = "";
 };
 
-// 기본 이벤트 등록
-likeBtn.addEventListener("click", () => {
-  isLikeClicked = !isLikeClicked;
-  likeImg.style.display = isLikeClicked ? "none" : "block";
-  filLikeImg.style.display = isLikeClicked ? "block" : "none";
-  likeNum.textContent = Number(likeNum.textContent) + (isLikeClicked ? 1 : -1);
-});
+//수정/삭제 모달 띄우기
+const toggleModal = () => {
+  modalTarget = "post";
+  modal.classList.remove("comment-option-modal");
+  modal.style.top = "";
+  modal.style.left = "";
+  modal.style.right = "";
+  modal.classList.toggle("hidden");
+};
 
-scrapBtn.addEventListener("click", () => {
-  isScrapClicked = !isScrapClicked;
-  scrapImg.style.display = isScrapClicked ? "none" : "block";
-  filScrapImg.style.display = isScrapClicked ? "block" : "none";
-  scrapCancel.style.display = isScrapClicked ? "block" : "none";
-});
+//수정 버튼 페이지 이동
+editBtn.addEventListener("click", () => {
+  if (modalTarget === "post") {
+    location.href = "./board-edit.html";
+  } else {
+    const commentText = modalTarget.querySelector(".comment-content-text");
 
-subMitBtn.addEventListener("click", addComment);
-menuIcon.addEventListener("click", () => modal.classList.toggle("hidden"));
-editBtn.addEventListener("click", () => location.href = "./board-edit.html");
-
-renderComments();
-
-
-// ==========================================
-// 삭제 로직 및 답글 버튼 클릭 로직
-// ==========================================
-let deleteTargetId = null;
-
-deleteBtn.addEventListener("click", () => {
-  modal.classList.add("hidden"); 
-  deleteTargetId = 'post'; 
-  confirmOverlay.classList.remove("hidden"); 
-});
-
-// 이벤트 위임 (점세개 팝업, 삭제 버튼, 답글 버튼 모두 여기서 처리)
-commentList.addEventListener('click', (e) => {
-  
-  // 1. 점세개 클릭 시 팝업 열기
-  if (e.target.classList.contains('comment-ellipsis-img')) {
-    const targetId = e.target.getAttribute('data-id');
-    const targetModal = document.getElementById(`comment-modal-${targetId}`);
-    document.querySelectorAll('.comment-modal-wrapper').forEach(p => p.classList.add('hidden'));
-    targetModal.classList.toggle('hidden');
-  }
-
-  // 2. 팝업 내 삭제하기 클릭 시
-  if (e.target.closest('.comment-delete-btn')) {
-    const btn = e.target.closest('.comment-delete-btn');
-    deleteTargetId = Number(btn.getAttribute('data-id'));
-    btn.closest('.comment-modal-wrapper').classList.add('hidden');
-    confirmOverlay.classList.remove('hidden');
-  }
-
-  // 3. '답글 달기' 버튼 클릭 시 대댓글 모드 활성화
-  if (e.target.classList.contains('reply-trigger-btn')) {
-    replyTargetId = Number(e.target.getAttribute('data-id'));
-    const parentComment = comments.find(c => c.id === replyTargetId);
-    
-    // 입력창으로 시선을 유도하고 Placeholder 변경
-    cmtInput.placeholder = `${parentComment.author}님에게 답글 남기기...`;
+    editTarget = modalTarget;
+    cmtInput.value = commentText.textContent;
+    cmtInput.placeholder = "댓글을 수정해주세요";
     cmtInput.focus();
-  }
 
-  if (e.target.classList.contains('comment-like-img')) {
-    const targetId = Number(e.target.getAttribute('data-id'));
-    
-    // 타겟 ID를 가진 댓글(또는 대댓글) 찾기
-    let targetComment = comments.find(c => c.id === targetId);
-    if (!targetComment) {
-      comments.forEach(c => {
-        if (c.replies) {
-          const reply = c.replies.find(r => r.id === targetId);
-          if (reply) targetComment = reply;
-        }
-      });
-    }
-
-    // 해당 댓글의 좋아요 상태와 숫자 토글
-    if (targetComment) {
-      targetComment.isLiked = !targetComment.isLiked; // 상태 반전 (false -> true -> false)
-      targetComment.likes += targetComment.isLiked ? 1 : -1; // true면 +1, false면 -1
-      
-      renderComments(); // 바뀐 데이터를 화면에 다시 그리기
-    }
+    modal.classList.add("hidden");
   }
 });
 
-btnYes.addEventListener("click", () => {
-  if (deleteTargetId === 'post') {
-    alert('게시글이 삭제되었습니다.');
-    location.href = '../html/board-list.html'; 
-  } else if (deleteTargetId !== null) {
-    alert('답변이 삭제되었습니다.');
-    comments = comments.filter(c => c.id !== deleteTargetId).map(c => {
-      if (c.replies) c.replies = c.replies.filter(r => r.id !== deleteTargetId);
-      return c;
-    });
-    renderComments(); 
+//댓글 좋아요 구현
+const toggleLike = (targetLikeBox) => {
+  const targetLikeCount = targetLikeBox.querySelector(".comment-like-count");
+  const targetLikeImg = targetLikeBox.querySelector(".comment-like-img");
+
+  const currentLike = Number(targetLikeCount.textContent);
+  const isLiked = targetLikeBox.dataset.liked === "true";
+
+  if (isLiked === false) {
+    targetLikeBox.dataset.liked = "true";
+    targetLikeCount.textContent = currentLike + 1;
+    targetLikeImg.src = "../assets/icons/heart-blue-fill.svg";
+  } else if (isLiked === true) {
+    targetLikeBox.dataset.liked = "false";
+    targetLikeCount.textContent = currentLike - 1;
+    targetLikeImg.src = "../assets/icons/heart-black.svg";
+  }
+};
+
+//댓글 목록 초기화
+commentList.innerHTML = "";
+
+//오늘 날짜 구현
+const getTodayText = () => {
+  const today = new Date();
+
+  const year = String(today.getFullYear()).slice(2);
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const date = String(today.getDate()).padStart(2, "0");
+
+  return `${year}/${month}/${date}`;
+};
+
+//답변 갯수 다시 세기
+const updateCommentCount = () => {
+  const totalCount = document.querySelectorAll(
+    ".comment-list .comment-item, .comment-list .re-comment-item",
+  ).length;
+
+  cmtCount.textContent = `답변 ${totalCount}개`;
+  commentNum.textContent = totalCount;
+
+  if (totalCount === 0) {
+    emptyComment.classList.remove("hidden");
+    commentList.classList.add("hidden");
+  } else {
+    emptyComment.classList.add("hidden");
+    commentList.classList.remove("hidden");
+  }
+};
+
+//댓글 좋아요 초기화
+const resetCommentLike = (comment) => {
+  const likeBox = comment.querySelector(".comment-like-box");
+  const likeCount = comment.querySelector(".comment-like-count");
+  const likeImg = comment.querySelector(".comment-like-img");
+
+  likeBox.dataset.liked = "false";
+  likeCount.textContent = 0;
+  likeImg.src = "../assets/icons/heart-black.svg";
+};
+
+//대댓글 버튼 만들기
+const addReplyButton = (comment) => {
+  const commentEtc = comment.querySelector(".comment-etc");
+  const replyBtn = document.createElement("button");
+
+  replyBtn.type = "button";
+  replyBtn.classList.add("reply-button");
+  replyBtn.textContent = "답글 달기";
+
+  commentEtc.appendChild(replyBtn);
+};
+
+//댓글 화면에 추가
+const addCommentView = () => {
+  const commentValue = cmtInput.value.trim();
+
+  if (commentValue === "") {
+    alert("댓글을 입력해주세요.");
+    return;
+  }
+
+  if (editTarget !== null) {
+    const editText = editTarget.querySelector(".comment-content-text");
+
+    editText.textContent = commentValue;
+
+    editTarget = null;
+    cmtInput.value = "";
+    cmtInput.placeholder = "답변을 입력해보세요";
+
+    return;
+  }
+
+  const newComment =
+    replyTarget === null
+      ? commentTemplate.cloneNode(true)
+      : reCommentTemplate.cloneNode(true);
+
+  const commentText = newComment.querySelector(".comment-content-text");
+  const commentDate = newComment.querySelector(".comment-etc > p");
+
+  commentText.textContent = commentValue;
+  commentDate.textContent = getTodayText();
+
+  resetCommentLike(newComment);
+
+  if (replyTarget === null) {
+    addReplyButton(newComment);
+    commentList.appendChild(newComment);
+  } else {
+    replyTarget.insertAdjacentElement("afterend", newComment);
+    replyTarget = null;
+    cmtInput.placeholder = "답변을 입력해보세요";
+  }
+
+  comments.push(commentValue);
+
+  updateCommentCount();
+
+  cmtInput.value = "";
+};
+
+//대댓글 입력 모드 구현
+const setReplyMode = (targetReplyBtn) => {
+  replyTarget = targetReplyBtn.closest(".comment-item");
+  editTarget = null;
+  cmtInput.placeholder = "답글을 입력해보세요";
+  cmtInput.focus();
+};
+
+//댓글 점세개 모달 위치 잡기
+const setCommentModalPosition = (targetEllipsis) => {
+  const iconPosition = targetEllipsis.getBoundingClientRect();
+  const modalWidth = 130;
+  const modalTop = iconPosition.bottom + 6;
+  const modalLeft = iconPosition.right - modalWidth;
+
+  modal.classList.add("comment-option-modal");
+  modal.style.top = `${modalTop}px`;
+  modal.style.left = `${modalLeft}px`;
+  modal.style.right = "auto";
+};
+
+//댓글 점세개 모달 구현
+const showCommentModal = (targetEllipsis) => {
+  const targetComment = targetEllipsis.closest(
+    ".comment-item, .re-comment-item",
+  );
+
+  if (
+    modalTarget === targetComment &&
+    modal.classList.contains("hidden") === false
+  ) {
+    modal.classList.add("hidden");
+    return;
+  }
+
+  modalTarget = targetComment;
+  setCommentModalPosition(targetEllipsis);
+  modal.classList.remove("hidden");
+};
+
+///게시글 삭제 확인 모달 띄우기
+const showPostDeleteConfirm = () => {
+  modal.classList.add("hidden");
+  deleteTarget = "post";
+  confirmOverlay.classList.remove("hidden");
+};
+
+//댓글 삭제 확인 모달 띄우기
+const showCommentDeleteConfirm = () => {
+  modal.classList.add("hidden");
+  deleteTarget = modalTarget;
+  confirmOverlay.classList.remove("hidden");
+};
+
+//삭제 취소 구현
+const cancelDelete = () => {
+  confirmOverlay.classList.add("hidden");
+  deleteTarget = null;
+};
+
+//삭제 확인 구현
+const confirmDelete = () => {
+  if (deleteTarget === "post") {
+    alert("게시글이 삭제되었습니다.");
+    location.href = "./board-list.html";
+  } else {
+    deleteTarget.remove();
+    deleteTarget = null;
     confirmOverlay.classList.add("hidden");
+    updateCommentCount();
+  }
+};
+
+//댓글 영역 클릭 이벤트 구현
+commentList.addEventListener("click", (event) => {
+  const targetLikeBox = event.target.closest(".comment-like-box");
+  const targetReplyBtn = event.target.closest(".reply-button");
+  const targetEllipsis = event.target.closest(".comment-ellipsis-img");
+
+  if (targetLikeBox) {
+    toggleLike(targetLikeBox);
+  }
+  if (targetReplyBtn) {
+    setReplyMode(targetReplyBtn);
+  }
+
+  if (targetEllipsis) {
+    showCommentModal(targetEllipsis);
   }
 });
 
-btnNo.addEventListener("click", () => confirmOverlay.classList.add("hidden"));
-
-document.addEventListener('click', (e) => {
-  if (!e.target.classList.contains('comment-ellipsis-img') && !e.target.closest('.comment-modal-wrapper')) {
-    document.querySelectorAll('.comment-modal-wrapper').forEach(p => p.classList.add('hidden'));
+//댓글 점세개 모달 닫기
+document.addEventListener("click", (event) => {
+  if (
+    !event.target.closest(".comment-ellipsis-img") &&
+    !event.target.closest(".post-modal") &&
+    !event.target.closest(".post-menu-icon")
+  ) {
+    modal.classList.add("hidden");
   }
 });
+
+likeBtn.addEventListener("click", likeBox);
+scrapBtn.addEventListener("click", scrapBox);
+subMitBtn.addEventListener("click", addCommentView);
+menuIcon.addEventListener("click", toggleModal);
+deleteBtn.addEventListener("click", () => {
+  if (modalTarget === "post") {
+    showPostDeleteConfirm();
+  } else {
+    showCommentDeleteConfirm();
+  }
+});
+btnNo.addEventListener("click", cancelDelete);
+btnYes.addEventListener("click", confirmDelete);
+
+updateCommentCount();

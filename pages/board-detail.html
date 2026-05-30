@@ -148,7 +148,7 @@
         </section>
 
         <div class="post-modal hidden">
-          <div class="post-modal-box">
+          <div class="post-modal-box modal-comment">
             <button class="edit-button" type="button">
               수정하기
               <img class="edit-icon" src="../assets/icons/pencil-b.svg" />
@@ -167,18 +167,17 @@
             </button>
           </div>
         </div>
-
-        <!--게시글 삭제 기능-->
+        <!--삭제 확인 모달-->
         <div class="delete-confirm-overlay hidden">
           <div class="delete-confirm-modal">
-            <p>삭제하시겠습니까?</p>
-            <div class="modal-btn-group">
-              <button class="btn-no" type="button">아니요</button>
+            <p class="delete-confirm-text">삭제하시겠습니까?</p>
+
+            <div class="delete-confirm-btn-box">
               <button class="btn-yes" type="button">예</button>
+              <button class="btn-no" type="button">아니요</button>
             </div>
           </div>
         </div>
-        
       </main>
     </div>
   </body>
