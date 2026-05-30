@@ -406,9 +406,11 @@ scrapBtn.addEventListener("click", scrapBox);
 subMitBtn.addEventListener("click", addCommentView);
 menuIcon.addEventListener("click", toggleModal);
 
-detailBackButton.addEventListener("click", () => {
-  location.href = "./board-list.html";
-});
+if (detailBackButton !== null) {
+  detailBackButton.addEventListener("click", () => {
+    location.href = "./board-list.html";
+  });
+}
 
 deleteBtn.addEventListener("click", () => {
   if (modalTarget === "post") {
@@ -417,6 +419,7 @@ deleteBtn.addEventListener("click", () => {
     showCommentDeleteConfirm();
   }
 });
+
 btnNo.addEventListener("click", cancelDelete);
 btnYes.addEventListener("click", confirmDelete);
 
