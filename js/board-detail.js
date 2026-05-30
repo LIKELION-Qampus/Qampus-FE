@@ -48,6 +48,17 @@ const reCommentTemplate = document
   .querySelector(".re-comment-item")
   .cloneNode(true);
 
+//수정데이터 반영
+const STORAGE_KEY = "qampusBoardPost";
+
+const postTitle = document.querySelector(".content-detail h4");
+const postContent = document.querySelector(".content-detail p");
+const postUserName = document.querySelector(".user-one");
+const postUserTime = document.querySelector(".user-time");
+
+//상세 페이지 뒤로가기 버튼
+const detailBackButton = document.querySelector(".detail-back-button");
+
 let isLikeClicked = false;
 let isScrapClicked = false;
 
@@ -127,6 +138,14 @@ const toggleModal = () => {
 //수정 버튼 페이지 이동
 editBtn.addEventListener("click", () => {
   if (modalTarget === "post") {
+    const currentPost = {
+      title: postTitle.textContent,
+      content: postContent.textContent,
+      user: postUserName.textContent,
+      time: postUserTime.textContent,
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(currentPost));
     location.href = "./board-edit.html";
   } else {
     const commentText = modalTarget.querySelector(".comment-content-text");
@@ -366,10 +385,33 @@ document.addEventListener("click", (event) => {
   }
 });
 
+//수정된 게시글
+const renderSavedPost = () => {
+  const savedPost = localStorage.getItem(STORAGE_KEY);
+
+  if (savedPost === null) {
+    return;
+  }
+
+  const post = JSON.parse(savedPost);
+
+  postTitle.textContent = post.title;
+  postContent.textContent = post.content;
+  postUserName.textContent = post.user;
+  postUserTime.textContent = post.time;
+};
+
 likeBtn.addEventListener("click", likeBox);
 scrapBtn.addEventListener("click", scrapBox);
 subMitBtn.addEventListener("click", addCommentView);
 menuIcon.addEventListener("click", toggleModal);
+
+if (detailBackButton !== null) {
+  detailBackButton.addEventListener("click", () => {
+    location.href = "./board-list.html";
+  });
+}
+
 deleteBtn.addEventListener("click", () => {
   if (modalTarget === "post") {
     showPostDeleteConfirm();
@@ -377,7 +419,9 @@ deleteBtn.addEventListener("click", () => {
     showCommentDeleteConfirm();
   }
 });
+
 btnNo.addEventListener("click", cancelDelete);
 btnYes.addEventListener("click", confirmDelete);
 
 updateCommentCount();
+renderSavedPost();
